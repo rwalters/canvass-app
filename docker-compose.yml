@@ -4,6 +4,9 @@ services:
   app:
     build:
       context: ./
+    command: ['bundle', 'exec', 'shotgun', '-p', '3000', '-o', '0.0.0.0', '/app/config.ru']
+    volumes:
+      - ./:/app
     ports:
       - "3000:3000"
     depends_on:

@@ -15,3 +15,7 @@ WORKDIR $APP_HOME
 
 COPY ./Gemfile* $APP_HOME/
 RUN bundle install
+
+ADD . $APP_HOME/
+
+EXPOSE 3000
