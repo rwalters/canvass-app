@@ -16,14 +16,6 @@ module Persistence
       def by_email(email)
         where(email: email)
       end
-
-      def by_access_token(token)
-        where("access_token = ? AND access_token_expiration > ?", token, Time.now)
-      end
-
-      def active
-        where(active: true)
-      end
     end
   end
 end

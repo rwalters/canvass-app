@@ -16,6 +16,7 @@ WORKDIR $APP_HOME
 COPY ./Gemfile* $APP_HOME/
 RUN bundle install
 
+COPY ./.env.docker $APP_HOME/.env
 ADD . $APP_HOME/
 
 EXPOSE 3000
