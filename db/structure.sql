@@ -35,35 +35,6 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE categories (
-    id integer NOT NULL,
-    name text NOT NULL
-);
-
-
---
--- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE categories_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
-
-
---
 -- Name: interactions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -117,9 +88,7 @@ CREATE TABLE schema_migrations (
 CREATE TABLE users (
     id integer NOT NULL,
     email text NOT NULL,
-    password_digest text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone
+    password_digest text
 );
 
 
@@ -151,7 +120,7 @@ CREATE TABLE voters (
     name text NOT NULL,
     address text NOT NULL,
     email text NOT NULL,
-    category_id integer,
+    category text NOT NULL,
     party_registration text NOT NULL,
     only_call_for_vote_reminder boolean DEFAULT true NOT NULL
 );
@@ -177,13 +146,6 @@ ALTER SEQUENCE voters_id_seq OWNED BY voters.id;
 
 
 --
--- Name: categories id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
-
-
---
 -- Name: interactions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -202,14 +164,6 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 ALTER TABLE ONLY voters ALTER COLUMN id SET DEFAULT nextval('voters_id_seq'::regclass);
-
-
---
--- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY categories
-    ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
 
 
 --
@@ -258,14 +212,6 @@ ALTER TABLE ONLY interactions
 
 ALTER TABLE ONLY interactions
     ADD CONSTRAINT interactions_voter_id_fkey FOREIGN KEY (voter_id) REFERENCES voters(id) ON DELETE RESTRICT;
-
-
---
--- Name: voters voters_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY voters
-    ADD CONSTRAINT voters_category_id_fkey FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE RESTRICT;
 
 
 --

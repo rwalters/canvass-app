@@ -1,19 +1,12 @@
 ROM::SQL.migration do
   change do
-    create_table(:categories) do
-      primary_key :id
-
-      column :name, String, null: false # Committed, Unaware, Transactional
-    end
-
     create_table(:voters) do
       primary_key :id
 
-      column :name,    String, null: false
-      column :address, String, null: false
-      column :email,   String, null: false
-
-      foreign_key :category_id, :categories, on_delete: :restrict
+      column :name,     String, null: false
+      column :address,  String, null: false
+      column :email,    String, null: false
+      column :category, String, null: false
 
       column :party_registration, String, null: false
       column :only_call_for_vote_reminder, TrueClass, default: true, null: false
