@@ -2,7 +2,7 @@ require 'types'
 
 module CanvassApp
   module Entities
-    class Interaction < Dry::Types::Struct
+    class Interaction < Dry::Struct
       attribute :id,              Types::Int
       attribute :voter_id,        Types::Strict::Int
       attribute :user_id,         Types::Strict::Int

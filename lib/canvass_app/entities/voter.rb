@@ -2,7 +2,7 @@ require 'types'
 
 module CanvassApp
   module Entities
-    class Voter < Dry::Types::Struct
+    class Voter < Dry::Struct
       attribute :id,                  Types::Int
       attribute :name,                Types::Strict::String
       attribute :email,               Types::Strict::String
