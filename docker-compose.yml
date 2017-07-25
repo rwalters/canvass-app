@@ -1,0 +1,25 @@
+version: '2.1'
+
+services:
+  app:
+    build:
+      context: ./
+    volumes:
+      - ./:/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+  db:
+    image: postgres:9.5-alpine
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./db/10_init.sql:/docker-entrypoint-initdb.d/10_init.sql
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=
+
+volumes:
+  postgres:
