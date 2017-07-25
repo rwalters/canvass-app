@@ -56,6 +56,14 @@ config :logger, level: :info
 #     config :canvass_app, CanvassApp.Endpoint, server: true
 #
 
+# config :canvass_app, CanvassApp.Endpoint,
+#  secret_key_base: System.get_env("SECRET_KEY_BASE")
+
+# Configure your database
+# config :canvass_app, CanvassApp.Repo,
+#  adapter: Ecto.Adapters.Postgres,
+#  url: System.get_env("DATABASE_URL")
+#  pool_size: 20
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 import_config "prod.secret.exs"
