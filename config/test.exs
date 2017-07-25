@@ -13,7 +13,6 @@ config :logger, level: :warn
 config :canvass_app, CanvassApp.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
+  password: "",
   database: "canvass_app_test",
-  hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
