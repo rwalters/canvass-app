@@ -6,7 +6,7 @@ ENV PORT=5000 MIX_ENV=prod PGHOST=db
 
 # Cache elixir deps
 ADD mix.* ./
-RUN mix do deps.get, deps.compile
+RUN mix deps.get && mix deps.compile
 
 # Same with npm deps
 ADD package.json package.json
@@ -15,8 +15,9 @@ RUN npm install
 ADD . .
 
 # Run frontend build, compile, and digest assets
-RUN brunch build --production && \
-    mix do compile, phoenix.digest
+RUN brunch build --production \
+    && mix compile \
+    && mix phoenix.digest
 
 USER default
 
