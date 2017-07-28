@@ -1,0 +1,53 @@
+<h2>Show interactions</h2>
+
+<ul>
+
+  <li>
+    <strong>Voter:</strong>
+    <%= @interactions.voter_id %>
+  </li>
+
+  <li>
+    <strong>Discussed:</strong>
+    <%= @interactions.discussed %>
+  </li>
+
+  <li>
+    <strong>Registered to vote:</strong>
+    <%= @interactions.registered_to_vote %>
+  </li>
+
+  <li>
+    <strong>Registered to change affiliation:</strong>
+    <%= @interactions.registered_to_change_affiliation %>
+  </li>
+
+  <li>
+    <strong>Refused:</strong>
+    <%= @interactions.refused %>
+  </li>
+
+  <li>
+    <strong>Other language:</strong>
+    <%= @interactions.other_language %>
+  </li>
+
+  <li>
+    <strong>Not home:</strong>
+    <%= @interactions.not_home %>
+  </li>
+
+  <li>
+    <strong>Moved:</strong>
+    <%= @interactions.moved %>
+  </li>
+
+  <li>
+    <strong>Dead:</strong>
+    <%= @interactions.dead %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: interactions_path(@conn, :edit, @interactions) %>
+<%= link "Back", to: interactions_path(@conn, :index) %>

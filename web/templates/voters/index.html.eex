@@ -1,0 +1,36 @@
+<h2>Listing voters</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>Category</th>
+      <th>Party registration</th>
+      <th>Only call for vote reminder</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for voters <- @voters do %>
+    <tr>
+      <td><%= voters.name %></td>
+      <td><%= voters.address %></td>
+      <td><%= voters.email %></td>
+      <td><%= voters.category %></td>
+      <td><%= voters.party_registration %></td>
+      <td><%= voters.only_call_for_vote_reminder %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: voters_path(@conn, :show, voters), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: voters_path(@conn, :edit, voters), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: voters_path(@conn, :delete, voters), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New voters", to: voters_path(@conn, :new) %>

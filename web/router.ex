@@ -16,8 +16,11 @@ defmodule CanvassApp.Router do
   scope "/", CanvassApp do
     pipe_through :browser # Use the default browser stack
 
+    resources "/voters", VotersController
+
+    resources "/interactions", InteractionsController
+
     get "/", PageController, :index
-    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,65 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :discussed, class: "control-label" %>
+    <%= checkbox f, :discussed, class: "form-control" %>
+    <%= error_tag f, :discussed %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :registered_to_vote, class: "control-label" %>
+    <%= checkbox f, :registered_to_vote, class: "form-control" %>
+    <%= error_tag f, :registered_to_vote %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :registered_to_change_affiliation, class: "control-label" %>
+    <%= checkbox f, :registered_to_change_affiliation, class: "form-control" %>
+    <%= error_tag f, :registered_to_change_affiliation %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :refused, class: "control-label" %>
+    <%= checkbox f, :refused, class: "form-control" %>
+    <%= error_tag f, :refused %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :other_language, class: "control-label" %>
+    <%= checkbox f, :other_language, class: "form-control" %>
+    <%= error_tag f, :other_language %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :not_home, class: "control-label" %>
+    <%= checkbox f, :not_home, class: "form-control" %>
+    <%= error_tag f, :not_home %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :moved, class: "control-label" %>
+    <%= checkbox f, :moved, class: "form-control" %>
+    <%= error_tag f, :moved %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :dead, class: "control-label" %>
+    <%= checkbox f, :dead, class: "form-control" %>
+    <%= error_tag f, :dead %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :rating, class: "control-label" %>
+    <%= checkbox f, :dead, class: "form-control" %>
+    <%= error_tag f, :dead %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

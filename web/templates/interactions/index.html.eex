@@ -1,0 +1,43 @@
+<h2>Listing interactions</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Voter</th>
+      <th>Discussed</th>
+      <th>Registered to vote</th>
+      <th>Registered to change affiliation</th>
+      <th>Refused</th>
+      <th>Other language</th>
+      <th>Not home</th>
+      <th>Moved</th>
+      <th>Dead</th>
+      <th>Rating</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for interactions <- @interactions do %>
+    <tr>
+      <td><%= interactions.voter_id %></td>
+      <td><%= interactions.discussed %></td>
+      <td><%= interactions.registered_to_vote %></td>
+      <td><%= interactions.registered_to_change_affiliation %></td>
+      <td><%= interactions.refused %></td>
+      <td><%= interactions.other_language %></td>
+      <td><%= interactions.not_home %></td>
+      <td><%= interactions.moved %></td>
+      <td><%= interactions.dead %></td>
+      <td><%= interactions.rating %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: interactions_path(@conn, :show, interactions), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: interactions_path(@conn, :edit, interactions), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: interactions_path(@conn, :delete, interactions), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New interactions", to: interactions_path(@conn, :new) %>

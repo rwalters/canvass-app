@@ -1,0 +1,6 @@
+<h2>New interactions</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: interactions_path(@conn, :create) %>
+
+<%= link "Back", to: interactions_path(@conn, :index) %>

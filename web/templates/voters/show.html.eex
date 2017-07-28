@@ -1,0 +1,38 @@
+<h2>Show voters</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @voters.name %>
+  </li>
+
+  <li>
+    <strong>Address:</strong>
+    <%= @voters.address %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @voters.email %>
+  </li>
+
+  <li>
+    <strong>Category:</strong>
+    <%= @voters.category %>
+  </li>
+
+  <li>
+    <strong>Party registration:</strong>
+    <%= @voters.party_registration %>
+  </li>
+
+  <li>
+    <strong>Only call for vote reminder:</strong>
+    <%= @voters.only_call_for_vote_reminder %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: voters_path(@conn, :edit, @voters) %>
+<%= link "Back", to: voters_path(@conn, :index) %>
