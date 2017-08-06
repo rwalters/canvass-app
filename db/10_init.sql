@@ -7,17 +7,6 @@ SET default_transaction_read_only = off;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 
---
--- Roles
---
-
-CREATE ROLE postgres;
-ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS;
-
-
-
-
-
 
 --
 -- Database creation
@@ -45,7 +34,6 @@ SET default_transaction_read_only = off;
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -246,7 +234,6 @@ SET default_transaction_read_only = off;
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -272,6 +259,50 @@ SET search_path = public, pg_catalog;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
+
+--
+-- Name: interactions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE interactions (
+    id integer NOT NULL,
+    discussed boolean DEFAULT false NOT NULL,
+    registered_to_vote boolean DEFAULT false NOT NULL,
+    registered_to_change_affiliation boolean DEFAULT false NOT NULL,
+    refused boolean DEFAULT false NOT NULL,
+    other_language boolean DEFAULT false NOT NULL,
+    not_home boolean DEFAULT false NOT NULL,
+    moved boolean DEFAULT false NOT NULL,
+    dead boolean DEFAULT false NOT NULL,
+    voter_id integer,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    rating integer DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE interactions OWNER TO postgres;
+
+--
+-- Name: interactions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE interactions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE interactions_id_seq OWNER TO postgres;
+
+--
+-- Name: interactions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE interactions_id_seq OWNED BY interactions.id;
+
 
 --
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: postgres
@@ -323,10 +354,79 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
+-- Name: voters; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE voters (
+    id integer NOT NULL,
+    name character varying(255),
+    address character varying(255),
+    email character varying(255),
+    category character varying(255),
+    party_registration character varying(255),
+    only_call_for_vote_reminder boolean DEFAULT false NOT NULL,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE voters OWNER TO postgres;
+
+--
+-- Name: voters_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE voters_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE voters_id_seq OWNER TO postgres;
+
+--
+-- Name: voters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE voters_id_seq OWNED BY voters.id;
+
+
+--
+-- Name: interactions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY interactions ALTER COLUMN id SET DEFAULT nextval('interactions_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: voters id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY voters ALTER COLUMN id SET DEFAULT nextval('voters_id_seq'::regclass);
+
+
+--
+-- Data for Name: interactions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY interactions (id, discussed, registered_to_vote, registered_to_change_affiliation, refused, other_language, not_home, moved, dead, voter_id, inserted_at, updated_at, rating) FROM stdin;
+\.
+
+
+--
+-- Name: interactions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('interactions_id_seq', 1, false);
 
 
 --
@@ -335,6 +435,9 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 COPY schema_migrations (version, inserted_at) FROM stdin;
 20170725022500	2017-07-26 01:53:17.207619
+20170728014752	2017-08-06 01:01:43.302275
+20170728015502	2017-08-06 01:01:43.407342
+20170728025409	2017-08-06 01:01:43.505101
 \.
 
 
@@ -355,6 +458,29 @@ SELECT pg_catalog.setval('users_id_seq', 1, true);
 
 
 --
+-- Data for Name: voters; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY voters (id, name, address, email, category, party_registration, only_call_for_vote_reminder, inserted_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: voters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('voters_id_seq', 1, false);
+
+
+--
+-- Name: interactions interactions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY interactions
+    ADD CONSTRAINT interactions_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -368,6 +494,29 @@ ALTER TABLE ONLY schema_migrations
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: voters voters_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY voters
+    ADD CONSTRAINT voters_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: interactions_voter_id_index; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX interactions_voter_id_index ON interactions USING btree (voter_id);
+
+
+--
+-- Name: interactions interactions_voter_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY interactions
+    ADD CONSTRAINT interactions_voter_id_fkey FOREIGN KEY (voter_id) REFERENCES voters(id);
 
 
 --
@@ -397,7 +546,6 @@ SET default_transaction_read_only = off;
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -445,7 +593,6 @@ SET default_transaction_read_only = off;
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -500,7 +647,6 @@ SET default_transaction_read_only = off;
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
