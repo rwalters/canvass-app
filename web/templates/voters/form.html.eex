@@ -12,20 +12,26 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :address, class: "control-label" %>
-    <%= text_input f, :address, class: "form-control" %>
-    <%= error_tag f, :address %>
-  </div>
-
-  <div class="form-group">
     <%= label f, :email, class: "control-label" %>
     <%= text_input f, :email, class: "form-control" %>
     <%= error_tag f, :email %>
   </div>
 
   <div class="form-group">
+    <%= label f, :address, class: "control-label" %>
+    <%= text_input f, :address, class: "form-control" %>
+    <%= error_tag f, :address %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :neighborhood, class: "control-label" %>
+    <%= text_input f, :neighborhood, class: "form-control" %>
+    <%= error_tag f, :neighborhood %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :category, class: "control-label" %>
-    <%= select(f, :category, ["Committed", "Unaware", "Transactional"]) %>
+    <%= select f, :category, ["Committed", "Unaware", "Transactional"], class: "form-control" %>
     <%= error_tag f, :category %>
   </div>
 

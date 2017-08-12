@@ -56,15 +56,15 @@
   <div class="form-group">
     <%= label f, :rating, class: "control-label" %><br>
     <%= radio_button f, :rating, 1 %>
-    <%= label f, :rating_1, "1" %>
+    <%= label f, :rating_1, "1" %>&nbsp;
     <%= radio_button f, :rating, 2 %>
-    <%= label f, :rating_2, "2" %>
+    <%= label f, :rating_2, "2" %>&nbsp;
     <%= radio_button f, :rating, 3 %>
-    <%= label f, :rating_3, "3" %>
+    <%= label f, :rating_3, "3" %>&nbsp;
     <%= radio_button f, :rating, 4 %>
-    <%= label f, :rating_4, "4" %>
+    <%= label f, :rating_4, "4" %>&nbsp;
     <%= radio_button f, :rating, 5 %>
-    <%= label f, :rating_5, "5" %>
+    <%= label f, :rating_5, "5" %>&nbsp;
     <%= error_tag f, :rating %>
   </div>
 
