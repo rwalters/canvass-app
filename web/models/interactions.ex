@@ -10,6 +10,7 @@ defmodule CanvassApp.Interactions do
     field :not_home, :boolean, default: false
     field :moved, :boolean, default: false
     field :dead, :boolean, default: false
+    field :rating, :integer
     belongs_to :voter, CanvassApp.Voter
 
     timestamps()
@@ -20,7 +21,7 @@ defmodule CanvassApp.Interactions do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:discussed, :registered_to_vote, :registered_to_change_affiliation, :refused, :other_language, :not_home, :moved, :dead])
-    |> validate_required([:discussed, :registered_to_vote, :registered_to_change_affiliation, :refused, :other_language, :not_home, :moved, :dead])
+    |> cast(params, [:discussed, :registered_to_vote, :registered_to_change_affiliation, :refused, :other_language, :not_home, :moved, :dead, :rating])
+    |> validate_required([:discussed, :registered_to_vote, :registered_to_change_affiliation, :refused, :other_language, :not_home, :moved, :dead, :rating])
   end
 end

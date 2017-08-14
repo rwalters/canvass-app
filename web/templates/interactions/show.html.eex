@@ -47,6 +47,10 @@
     <%= @interactions.dead %>
   </li>
 
+  <li>
+    <strong>Rating:</strong>
+    <%= @interactions.rating %>
+  </li>
 </ul>
 
 <%= link "Edit", to: interactions_path(@conn, :edit, @interactions) %>

@@ -13,6 +13,11 @@
   </li>
 
   <li>
+    <strong>Neighborhood:</strong>
+    <%= @voters.neighborhood %>
+  </li>
+
+  <li>
     <strong>Email:</strong>
     <%= @voters.email %>
   </li>
