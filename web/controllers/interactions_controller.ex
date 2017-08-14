@@ -1,5 +1,6 @@
 defmodule CanvassApp.InteractionsController do
   use CanvassApp.Web, :controller
+  require Logger
 
   alias CanvassApp.Interactions
 
@@ -14,7 +15,9 @@ defmodule CanvassApp.InteractionsController do
   end
 
   def create(conn, %{"interactions" => interactions_params}) do
+    Logger.info inspect(interactions_params)
     changeset = Interactions.changeset(%Interactions{}, interactions_params)
+    Logger.info inspect(changeset)
 
     case Repo.insert(changeset) do
       {:ok, _interactions} ->
@@ -38,8 +41,10 @@ defmodule CanvassApp.InteractionsController do
   end
 
   def update(conn, %{"id" => id, "interactions" => interactions_params}) do
+    Logger.info inspect(interactions_params)
     interactions = Repo.get!(Interactions, id)
     changeset = Interactions.changeset(interactions, interactions_params)
+    Logger.info inspect(changeset)
 
     case Repo.update(changeset) do
       {:ok, interactions} ->

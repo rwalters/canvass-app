@@ -1,5 +1,6 @@
 defmodule CanvassApp.VotersController do
   use CanvassApp.Web, :controller
+  require Logger
 
   alias CanvassApp.Voters
 
@@ -14,7 +15,9 @@ defmodule CanvassApp.VotersController do
   end
 
   def create(conn, %{"voters" => voters_params}) do
+    Logger.info inspect(voters_params)
     changeset = Voters.changeset(%Voters{}, voters_params)
+    Logger.info inspect(changeset)
 
     case Repo.insert(changeset) do
       {:ok, _voters} ->
@@ -38,8 +41,10 @@ defmodule CanvassApp.VotersController do
   end
 
   def update(conn, %{"id" => id, "voters" => voters_params}) do
+    Logger.info inspect(voters_params)
     voters = Repo.get!(Voters, id)
     changeset = Voters.changeset(voters, voters_params)
+    Logger.info inspect(changeset)
 
     case Repo.update(changeset) do
       {:ok, voters} ->
