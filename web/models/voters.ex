@@ -6,6 +6,7 @@ defmodule CanvassApp.Voters do
     field :address, :string
     field :neighborhood, :string
     field :email, :string, null: false
+    field :phone, :string, null: false
     field :category, :string
     field :party_registration, :string
     field :only_call_for_vote_reminder, :boolean, default: false
@@ -18,7 +19,7 @@ defmodule CanvassApp.Voters do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :address, :email, :category, :party_registration, :only_call_for_vote_reminder, :neighborhood])
+    |> cast(params, [:name, :address, :email, :phone, :category, :party_registration, :only_call_for_vote_reminder, :neighborhood])
     |> validate_required([:name, :address, :email, :category, :party_registration, :only_call_for_vote_reminder])
     |> validate_inclusion(:category, ~w(Committed Unaware Transactional))
     |> foreign_key_constraint(:voter_id)

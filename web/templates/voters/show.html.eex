@@ -18,11 +18,6 @@
   </li>
 
   <li>
-    <strong>Email:</strong>
-    <%= @voters.email %>
-  </li>
-
-  <li>
     <strong>Category:</strong>
     <%= @voters.category %>
   </li>
@@ -35,6 +30,16 @@
   <li>
     <strong>Only call for vote reminder:</strong>
     <%= @voters.only_call_for_vote_reminder %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @voters.email %>
+  </li>
+
+  <li>
+    <strong>Phone Number:</strong>
+    <%= @voters.phone %>
   </li>
 
 </ul>

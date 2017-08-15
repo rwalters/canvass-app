@@ -6,11 +6,11 @@
       <th>Name</th>
       <th>Address</th>
       <th>Neighborhood</th>
-      <th>Email</th>
       <th>Category</th>
       <th>Party registration</th>
       <th>Only call for vote reminder</th>
-
+      <th>Email</th>
+      <th>Phone Number</th>
       <th></th>
     </tr>
   </thead>
@@ -20,10 +20,11 @@
       <td><%= voters.name %></td>
       <td><%= voters.address %></td>
       <td><%= voters.neighborhood %></td>
-      <td><%= voters.email %></td>
       <td><%= voters.category %></td>
       <td><%= voters.party_registration %></td>
       <td><%= voters.only_call_for_vote_reminder %></td>
+      <td><%= voters.email %></td>
+      <td><%= voters.phone %></td>
 
       <td class="text-right">
         <%= link "Show", to: voters_path(@conn, :show, voters), class: "btn btn-default btn-xs" %>

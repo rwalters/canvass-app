@@ -12,12 +12,6 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :email, class: "control-label" %>
-    <%= text_input f, :email, class: "form-control" %>
-    <%= error_tag f, :email %>
-  </div>
-
-  <div class="form-group">
     <%= label f, :address, class: "control-label" %>
     <%= text_input f, :address, class: "form-control" %>
     <%= error_tag f, :address %>
@@ -30,8 +24,13 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :category, class: "control-label" %>
-    <%= select f, :category, ["Committed", "Unaware", "Transactional"], class: "form-control" %>
+    <%= label f, :category, class: "control-label" %><br>
+    <%= radio_button f, :category, "Committed" %>
+    <%= label f, :category_committed, "Committed" %>&nbsp;
+    <%= radio_button f, :category, "Unaware" %>
+    <%= label f, :category_unaware, "Unaware" %>&nbsp;
+    <%= radio_button f, :category, "Transactional" %>
+    <%= label f, :category_transactional, "Transactional" %>&nbsp;
     <%= error_tag f, :category %>
   </div>
 
@@ -45,6 +44,18 @@
     <%= label f, :only_call_for_vote_reminder, class: "control-label" %>
     <%= checkbox f, :only_call_for_vote_reminder, class: "form-control" %>
     <%= error_tag f, :only_call_for_vote_reminder %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :email, class: "control-label" %>
+    <%= text_input f, :email, class: "form-control" %>
+    <%= error_tag f, :email %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :phone, "Phone Number", class: "control-label" %>
+    <%= text_input f, :phone, class: "form-control" %>
+    <%= error_tag f, :phone %>
   </div>
 
   <div class="form-group">
