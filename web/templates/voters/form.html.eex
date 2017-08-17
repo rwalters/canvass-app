@@ -24,13 +24,8 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :category, class: "control-label" %><br>
-    <%= radio_button f, :category, "Committed" %>
-    <%= label f, :category_committed, "Committed" %>&nbsp;
-    <%= radio_button f, :category, "Unaware" %>
-    <%= label f, :category_unaware, "Unaware" %>&nbsp;
-    <%= radio_button f, :category, "Transactional" %>
-    <%= label f, :category_transactional, "Transactional" %>&nbsp;
+    <%= label f, :category, class: "control-label" %>
+    <%= select f, :category, ["Committed", "Unaware", "Transactional"], class: "form-control" %>
     <%= error_tag f, :category %>
   </div>
 
@@ -38,12 +33,6 @@
     <%= label f, :party_registration, class: "control-label" %>
     <%= text_input f, :party_registration, class: "form-control" %>
     <%= error_tag f, :party_registration %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :only_call_for_vote_reminder, class: "control-label" %>
-    <%= checkbox f, :only_call_for_vote_reminder, class: "form-control" %>
-    <%= error_tag f, :only_call_for_vote_reminder %>
   </div>
 
   <div class="form-group">
@@ -56,6 +45,27 @@
     <%= label f, :phone, "Phone Number", class: "control-label" %>
     <%= text_input f, :phone, class: "form-control" %>
     <%= error_tag f, :phone %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :ideas, "Ideas", class: "control-label" %>
+    <%= textarea f, :ideas, class: "form-control" %>
+    <%= error_tag f, :ideas %>
+  </div>
+
+  <h3>Contact Choice</h2>
+
+  <div class="form-group">
+    <div>
+      <%= label f, :only_call_for_vote_reminder,    class: "control-label" %>
+      <%= checkbox f, :only_call_for_vote_reminder, class: "form-control" %>
+      <%= error_tag f, :only_call_for_vote_reminder %>
+    </div>
+    <div>
+      <%= label f, :no_fundraising,     class: "control-label" %>
+      <%= checkbox f, :no_fundraising,  class: "form-control" %>
+      <%= error_tag f, :no_fundraising %>
+    </div>
   </div>
 
   <div class="form-group">

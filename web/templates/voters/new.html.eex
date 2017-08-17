@@ -1,4 +1,4 @@
-<h2>New voters</h2>
+<h2>New Contact Information</h2>
 
 <%= render "form.html", changeset: @changeset,
                         action: voters_path(@conn, :create) %>
