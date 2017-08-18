@@ -2,10 +2,7 @@ version: '2.1'
 
 services:
   app:
-    build:
-      context: ./
-    volumes:
-      - ./:/app
+    image: canvassapp:latest
     ports:
       - "5000:5000"
     depends_on:

@@ -1,24 +1,28 @@
 FROM bitwalker/alpine-elixir-phoenix:latest
 
 # Set exposed ports
-EXPOSE 5000
-ENV PORT=5000 MIX_ENV=prod PGHOST=db
+ENV PORT=80
+ENV MIX_ENV=prod BRUNCH_ENV=production
+
+# Update elixir
+RUN mix local.hex --force \
+  && mix local.rebar --force
 
 # Cache elixir deps
 ADD mix.* ./
-RUN mix deps.get && mix deps.compile
+RUN mix do deps.get, deps.compile
 
 # Same with npm deps
-ADD package.json package.json
-RUN npm install
+ADD package.json ./
+RUN npm install babel-preset-env --save-dev \
+  && npm install
 
-ADD . .
+ADD . ./
 
 # Run frontend build, compile, and digest assets
-RUN brunch build --production \
-    && mix compile \
-    && mix phoenix.digest
+RUN ./node_modules/brunch/bin/brunch build \
+  && mix do compile, phx.digest
 
 USER default
 
-CMD ["mix", "phoenix.server"]
+CMD ["mix", "phx.server"]
