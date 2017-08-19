@@ -4,7 +4,7 @@ defmodule CanvassApp.Mixfile do
   def project do
     [app: :canvass_app,
      version: "0.0.1",
-     elixir: "~> 1.5.1",
+     elixir: "~> 1.4.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -48,7 +48,7 @@ defmodule CanvassApp.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+    ["ecto.setup": ["ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
      "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
